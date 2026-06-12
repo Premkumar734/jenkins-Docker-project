@@ -4,23 +4,25 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git `https://github.com/Premkumar734/jenkins-Docker-project.git
-                // GIt clone command to fetch the code from the repository
+                git 'https://github.com/Premkumar734/jenkins-Docker-project.git'
             }
         }
-        stage('Build mage') {
+
+        stage('Build Image') {
             steps {
                 sh 'docker build -t mywebsite .'
-                // building the docker image using the Dockerfile in the repository
             }
         }
+
         stage('Deploy') {
             steps {
-                sh `docker stop mywebsite || true`
-                sh `docker rm mywebsite || true`
-                sh `docker run -d -p 80:80 --name mywebsite mywebsite`
-                // deploying the docker container and mapping port 80 of the host to port 80 of the container
+                sh 'docker stop mywebsite || true'
+                sh 'docker rm mywebsite || true'
+                sh 'docker run -d -p 80:80 --name mywebsite mywebsite'
             }
         }
     }
 }
+~                                                                                                                                                                        
+~                                                                                                                                                                        
+~                                          
