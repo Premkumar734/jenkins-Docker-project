@@ -1,7 +1,3 @@
-
-### App.java
-
-```java
 package com.prem;
 
 public class App {
@@ -9,4 +5,3 @@ public class App {
         System.out.println("Hello from Maven!");
     }
 }
-```
