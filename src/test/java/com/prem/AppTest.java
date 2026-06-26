@@ -1,6 +1,3 @@
-### AppTest.java
-
-```java
 package com.prem;
 
 public class AppTest {
@@ -9,4 +6,3 @@ public class AppTest {
         System.out.println("Test Executed Successfully");
     }
 }
-```
