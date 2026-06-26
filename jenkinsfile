@@ -1,12 +1,6 @@
 pipeline {
 agent any
 
-tools {
-    // Optional (only works if configured in Jenkins Global Tools)
-    maven 'Maven'
-    jdk 'JDK11'
-}
-
 stages {
 
     stage('Git Checkout') {
