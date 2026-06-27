@@ -68,21 +68,59 @@ public class AppTest {
 
 ```groovy
 pipeline {
-    agent any
+agent any
 
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
+stages {
 
-        stage('Build') {
-            steps {
-                sh 'mvn clean package'
-            }
+    stage('Git Checkout') {
+        steps {
+            git branch: 'main',
+                url: 'https://github.com/Premkumar734/jenkins-Docker-project.git'
         }
     }
+
+    stage('Build') {
+        steps {
+            echo 'Building the project...'
+            sh 'mvn clean package -DskipTests'
+        }
+    }
+
+    stage('Test') {
+        steps {
+            echo 'Running tests...'
+            sh 'mvn test'
+        }
+    }
+
+    stage('Deploy') {
+        steps {
+            echo 'Deploying application...'
+            
+            // Example deployment (local container/server)
+            sh '''
+                echo "Stopping old container (if exists)"
+                docker stop myapp || true
+                docker rm myapp || true
+
+                echo "Building Docker image"
+                docker build -t myapp .
+
+                echo "Running new container"
+                docker run -d --name myapp -p 8080:8080 myapp
+            '''
+        }
+    }
+}
+
+post {
+    success {
+        echo 'Pipeline completed successfully!'
+    }
+    failure {
+        echo 'Pipeline failed. Check logs.'
+    }
+}
 }
 ```
 
